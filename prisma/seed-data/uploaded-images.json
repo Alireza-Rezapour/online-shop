@@ -1,0 +1,387 @@
+{
+  "categories/acc-bags": {
+    "key": "images/categories/seed-acc-bags.webp",
+    "size": 689350,
+    "mimeType": "image/webp"
+  },
+  "categories/acc-belts-hats": {
+    "key": "images/categories/seed-acc-belts-hats.webp",
+    "size": 811592,
+    "mimeType": "image/webp"
+  },
+  "categories/accessories": {
+    "key": "images/categories/seed-accessories.webp",
+    "size": 396844,
+    "mimeType": "image/webp"
+  },
+  "categories/kids": {
+    "key": "images/categories/seed-kids.webp",
+    "size": 1027598,
+    "mimeType": "image/webp"
+  },
+  "categories/kids-boys": {
+    "key": "images/categories/seed-kids-boys.webp",
+    "size": 579266,
+    "mimeType": "image/webp"
+  },
+  "categories/kids-girls": {
+    "key": "images/categories/seed-kids-girls.webp",
+    "size": 527980,
+    "mimeType": "image/webp"
+  },
+  "categories/men": {
+    "key": "images/categories/seed-men.webp",
+    "size": 656654,
+    "mimeType": "image/webp"
+  },
+  "categories/men-bottoms": {
+    "key": "images/categories/seed-men-bottoms.webp",
+    "size": 331676,
+    "mimeType": "image/webp"
+  },
+  "categories/men-tops": {
+    "key": "images/categories/seed-men-tops.webp",
+    "size": 966882,
+    "mimeType": "image/webp"
+  },
+  "categories/women": {
+    "key": "images/categories/seed-women.webp",
+    "size": 683860,
+    "mimeType": "image/webp"
+  },
+  "categories/women-bottoms": {
+    "key": "images/categories/seed-women-bottoms.webp",
+    "size": 1372980,
+    "mimeType": "image/webp"
+  },
+  "categories/women-tops": {
+    "key": "images/categories/seed-women-tops.webp",
+    "size": 606836,
+    "mimeType": "image/webp"
+  },
+  "collections/cold-season": {
+    "key": "images/collections/seed-cold-season.webp",
+    "size": 2008796,
+    "mimeType": "image/webp"
+  },
+  "collections/essentials": {
+    "key": "images/collections/seed-essentials.webp",
+    "size": 965608,
+    "mimeType": "image/webp"
+  },
+  "collections/kids-corner": {
+    "key": "images/collections/seed-kids-corner.webp",
+    "size": 506590,
+    "mimeType": "image/webp"
+  },
+  "collections/new-season": {
+    "key": "images/collections/seed-new-season.webp",
+    "size": 603384,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-1-desktop": {
+    "key": "images/hero-slides/seed-slide-1-desktop.webp",
+    "size": 64366,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-1-mobile": {
+    "key": "images/hero-slides/seed-slide-1-mobile.webp",
+    "size": 74826,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-2-desktop": {
+    "key": "images/hero-slides/seed-slide-2-desktop.webp",
+    "size": 75634,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-2-mobile": {
+    "key": "images/hero-slides/seed-slide-2-mobile.webp",
+    "size": 89024,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-3-desktop": {
+    "key": "images/hero-slides/seed-slide-3-desktop.webp",
+    "size": 75096,
+    "mimeType": "image/webp"
+  },
+  "hero/slide-3-mobile": {
+    "key": "images/hero-slides/seed-slide-3-mobile.webp",
+    "size": 87816,
+    "mimeType": "image/webp"
+  },
+  "looks/elegant-women": {
+    "key": "images/looks/seed-elegant-women.webp",
+    "size": 558718,
+    "mimeType": "image/webp"
+  },
+  "looks/kids-weekend": {
+    "key": "images/looks/seed-kids-weekend.webp",
+    "size": 466016,
+    "mimeType": "image/webp"
+  },
+  "looks/urban-casual-men": {
+    "key": "images/looks/seed-urban-casual-men.webp",
+    "size": 356544,
+    "mimeType": "image/webp"
+  },
+  "products/backpack-leather-minimal/1": {
+    "key": "images/products/seed-backpack-leather-minimal-1.webp",
+    "size": 422592,
+    "mimeType": "image/webp"
+  },
+  "products/backpack-leather-minimal/2": {
+    "key": "images/products/seed-backpack-leather-minimal-2.webp",
+    "size": 951386,
+    "mimeType": "image/webp"
+  },
+  "products/backpack-urban-waterproof/1": {
+    "key": "images/products/seed-backpack-urban-waterproof-1.webp",
+    "size": 800572,
+    "mimeType": "image/webp"
+  },
+  "products/bag-shoulder-canvas/1": {
+    "key": "images/products/seed-bag-shoulder-canvas-1.webp",
+    "size": 405882,
+    "mimeType": "image/webp"
+  },
+  "products/bag-shoulder-canvas/2": {
+    "key": "images/products/seed-bag-shoulder-canvas-2.webp",
+    "size": 508268,
+    "mimeType": "image/webp"
+  },
+  "products/bag-shoulder-leather-mini/1": {
+    "key": "images/products/seed-bag-shoulder-leather-mini-1.webp",
+    "size": 780716,
+    "mimeType": "image/webp"
+  },
+  "products/belt-canvas-casual/1": {
+    "key": "images/products/seed-belt-canvas-casual-1.webp",
+    "size": 254138,
+    "mimeType": "image/webp"
+  },
+  "products/belt-leather-classic/1": {
+    "key": "images/products/seed-belt-leather-classic-1.webp",
+    "size": 1467874,
+    "mimeType": "image/webp"
+  },
+  "products/boys-jeans-stretch/1": {
+    "key": "images/products/seed-boys-jeans-stretch-1.webp",
+    "size": 822026,
+    "mimeType": "image/webp"
+  },
+  "products/boys-jogger-cotton/1": {
+    "key": "images/products/seed-boys-jogger-cotton-1.webp",
+    "size": 641350,
+    "mimeType": "image/webp"
+  },
+  "products/boys-tshirt-graphic/1": {
+    "key": "images/products/seed-boys-tshirt-graphic-1.webp",
+    "size": 717808,
+    "mimeType": "image/webp"
+  },
+  "products/boys-tshirt-striped/1": {
+    "key": "images/products/seed-boys-tshirt-striped-1.webp",
+    "size": 1339298,
+    "mimeType": "image/webp"
+  },
+  "products/boys-tshirt-striped/2": {
+    "key": "images/products/seed-boys-tshirt-striped-2.webp",
+    "size": 383208,
+    "mimeType": "image/webp"
+  },
+  "products/girls-dress-floral/1": {
+    "key": "images/products/seed-girls-dress-floral-1.webp",
+    "size": 637602,
+    "mimeType": "image/webp"
+  },
+  "products/girls-dress-velvet/1": {
+    "key": "images/products/seed-girls-dress-velvet-1.webp",
+    "size": 866586,
+    "mimeType": "image/webp"
+  },
+  "products/girls-dress-velvet/2": {
+    "key": "images/products/seed-girls-dress-velvet-2.webp",
+    "size": 774390,
+    "mimeType": "image/webp"
+  },
+  "products/girls-sweatshirt-crop/1": {
+    "key": "images/products/seed-girls-sweatshirt-crop-1.webp",
+    "size": 870020,
+    "mimeType": "image/webp"
+  },
+  "products/girls-sweatshirt-hooded/1": {
+    "key": "images/products/seed-girls-sweatshirt-hooded-1.webp",
+    "size": 1197542,
+    "mimeType": "image/webp"
+  },
+  "products/hat-baseball-cotton/1": {
+    "key": "images/products/seed-hat-baseball-cotton-1.webp",
+    "size": 329896,
+    "mimeType": "image/webp"
+  },
+  "products/hat-wool-beanie/1": {
+    "key": "images/products/seed-hat-wool-beanie-1.webp",
+    "size": 1084252,
+    "mimeType": "image/webp"
+  },
+  "products/men-chino-cotton/1": {
+    "key": "images/products/seed-men-chino-cotton-1.webp",
+    "size": 498048,
+    "mimeType": "image/webp"
+  },
+  "products/men-chino-cotton/2": {
+    "key": "images/products/seed-men-chino-cotton-2.webp",
+    "size": 1006400,
+    "mimeType": "image/webp"
+  },
+  "products/men-jeans-slim-dark/1": {
+    "key": "images/products/seed-men-jeans-slim-dark-1.jpg",
+    "size": 584880,
+    "mimeType": "image/jpeg"
+  },
+  "products/men-jeans-slim-dark/2": {
+    "key": "images/products/seed-men-jeans-slim-dark-2.jpg",
+    "size": 1003519,
+    "mimeType": "image/jpeg"
+  },
+  "products/men-jeans-straight-washed/1": {
+    "key": "images/products/seed-men-jeans-straight-washed-1.webp",
+    "size": 924900,
+    "mimeType": "image/webp"
+  },
+  "products/men-jeans-straight-washed/2": {
+    "key": "images/products/seed-men-jeans-straight-washed-2.webp",
+    "size": 859574,
+    "mimeType": "image/webp"
+  },
+  "products/men-polo-pique/1": {
+    "key": "images/products/seed-men-polo-pique-1.webp",
+    "size": 1159144,
+    "mimeType": "image/webp"
+  },
+  "products/men-polo-pique/2": {
+    "key": "images/products/seed-men-polo-pique-2.webp",
+    "size": 120158,
+    "mimeType": "image/webp"
+  },
+  "products/men-shirt-checked-flannel/1": {
+    "key": "images/products/seed-men-shirt-checked-flannel-1.webp",
+    "size": 1152494,
+    "mimeType": "image/webp"
+  },
+  "products/men-shirt-checked-flannel/2": {
+    "key": "images/products/seed-men-shirt-checked-flannel-2.webp",
+    "size": 806606,
+    "mimeType": "image/webp"
+  },
+  "products/men-shirt-linen-classic/1": {
+    "key": "images/products/seed-men-shirt-linen-classic-1.jpg",
+    "size": 21283,
+    "mimeType": "image/jpeg"
+  },
+  "products/men-shirt-linen-classic/2": {
+    "key": "images/products/seed-men-shirt-linen-classic-2.jpg",
+    "size": 21315,
+    "mimeType": "image/jpeg"
+  },
+  "products/men-trousers-pleated/1": {
+    "key": "images/products/seed-men-trousers-pleated-1.webp",
+    "size": 1252866,
+    "mimeType": "image/webp"
+  },
+  "products/men-trousers-pleated/2": {
+    "key": "images/products/seed-men-trousers-pleated-2.webp",
+    "size": 1576128,
+    "mimeType": "image/webp"
+  },
+  "products/men-tshirt-oversize-cotton/1": {
+    "key": "images/products/seed-men-tshirt-oversize-cotton-1.webp",
+    "size": 542682,
+    "mimeType": "image/webp"
+  },
+  "products/men-tshirt-oversize-cotton/2": {
+    "key": "images/products/seed-men-tshirt-oversize-cotton-2.webp",
+    "size": 631768,
+    "mimeType": "image/webp"
+  },
+  "products/women-blouse-satin/1": {
+    "key": "images/products/seed-women-blouse-satin-1.webp",
+    "size": 658380,
+    "mimeType": "image/webp"
+  },
+  "products/women-blouse-satin/2": {
+    "key": "images/products/seed-women-blouse-satin-2.webp",
+    "size": 545662,
+    "mimeType": "image/webp"
+  },
+  "products/women-blouse-striped/1": {
+    "key": "images/products/seed-women-blouse-striped-1.webp",
+    "size": 1200352,
+    "mimeType": "image/webp"
+  },
+  "products/women-blouse-striped/2": {
+    "key": "images/products/seed-women-blouse-striped-2.webp",
+    "size": 1817628,
+    "mimeType": "image/webp"
+  },
+  "products/women-jeans-mom/1": {
+    "key": "images/products/seed-women-jeans-mom-1.webp",
+    "size": 2643760,
+    "mimeType": "image/webp"
+  },
+  "products/women-jeans-mom/2": {
+    "key": "images/products/seed-women-jeans-mom-2.webp",
+    "size": 1087378,
+    "mimeType": "image/webp"
+  },
+  "products/women-manteau-linen-long/1": {
+    "key": "images/products/seed-women-manteau-linen-long-1.webp",
+    "size": 435734,
+    "mimeType": "image/webp"
+  },
+  "products/women-manteau-linen-long/2": {
+    "key": "images/products/seed-women-manteau-linen-long-2.webp",
+    "size": 522428,
+    "mimeType": "image/webp"
+  },
+  "products/women-manteau-wool-coat/1": {
+    "key": "images/products/seed-women-manteau-wool-coat-1.webp",
+    "size": 1175644,
+    "mimeType": "image/webp"
+  },
+  "products/women-manteau-wool-coat/2": {
+    "key": "images/products/seed-women-manteau-wool-coat-2.webp",
+    "size": 2763802,
+    "mimeType": "image/webp"
+  },
+  "products/women-pants-wide-leg/1": {
+    "key": "images/products/seed-women-pants-wide-leg-1.webp",
+    "size": 791662,
+    "mimeType": "image/webp"
+  },
+  "products/women-pants-wide-leg/2": {
+    "key": "images/products/seed-women-pants-wide-leg-2.webp",
+    "size": 1712524,
+    "mimeType": "image/webp"
+  },
+  "products/women-skirt-denim/1": {
+    "key": "images/products/seed-women-skirt-denim-1.webp",
+    "size": 2363046,
+    "mimeType": "image/webp"
+  },
+  "products/women-skirt-denim/2": {
+    "key": "images/products/seed-women-skirt-denim-2.webp",
+    "size": 1526654,
+    "mimeType": "image/webp"
+  },
+  "products/women-skirt-midi-pleated/1": {
+    "key": "images/products/seed-women-skirt-midi-pleated-1.webp",
+    "size": 1959964,
+    "mimeType": "image/webp"
+  },
+  "products/women-skirt-midi-pleated/2": {
+    "key": "images/products/seed-women-skirt-midi-pleated-2.webp",
+    "size": 1846234,
+    "mimeType": "image/webp"
+  }
+}

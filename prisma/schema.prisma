@@ -1,0 +1,740 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          String?
+  banned        Boolean?  @default(false)
+  banReason     String?
+  banExpires    DateTime?
+  sessions      Session[]
+  accounts      Account[]
+  firstName            String?
+  lastName            String?
+  birthDate           String?
+  gender              String?
+
+  orders Order[]
+
+  addresses  Address[]
+
+  favorites Favorite[]
+
+  reviews Review[]
+
+  CouponUsage   CouponUser[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id             String   @id
+  expiresAt      DateTime
+  token          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  impersonatedBy String?
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Category {
+  id       String @id @default(cuid())
+  name     String
+  slug     String @unique
+
+  parentId String?
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[] @relation("CategoryTree")
+
+  products Product[]
+
+  image    String?
+
+  sizeChartId String?
+  sizeChart   SizeChart? @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categoryAttributes CategoryAttribute[]
+
+  @@index([parentId])
+  @@index([sizeChartId])
+}
+
+model Product {
+  id          String @id @default(cuid())
+
+  title       String
+  slug        String @unique
+
+  coverImage  String?
+  hoverImage  String?
+
+  description String?
+
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  basePrice   Int
+  salePrice   Int?
+
+  isPublished Boolean @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  images      ProductImage[]
+  variants    ProductVariant[]
+  attributes  ProductAttribute[]
+
+  collections ProductCollection[]
+
+  
+  favorites Favorite[]
+
+  looks     LookItem[]
+
+  reviews Review[]
+
+  searchVector Unsupported("tsvector")? @default(dbgenerated())
+
+  @@index([searchVector], type: Gin)
+
+  @@index([categoryId])
+}
+
+model Favorite {
+  id String @id @default(cuid())
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@index([productId])
+}
+
+
+model ProductImage {
+  id        String @id @default(cuid())
+
+  url       String
+
+  alt      String
+
+  sortOrder Int @default(0)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Color {
+  id       String @id @default(cuid())
+
+  name     String @unique
+  hex      String @unique
+  code     String @unique
+
+  variants ProductVariant[]
+}
+
+// A SizeChart is a reusable, named set of sizes (e.g. "Men's Clothing",
+// "Shoes EU"). Categories reference a chart instead of owning sizes directly.
+model SizeChart {
+  id         String     @id @default(cuid())
+  name       String     @unique
+
+  sizes      Size[]
+  categories Category[]
+
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Size {
+  id          String @id @default(cuid())
+
+  sizeChartId String
+  sizeChart   SizeChart @relation(fields: [sizeChartId], references: [id], onDelete: Cascade)
+
+  name        String
+  sortOrder   Int    @default(0)
+
+  variants    ProductVariant[]
+
+  @@unique([sizeChartId, name])
+  @@index([sizeChartId])
+}
+
+model ProductVariant {
+  id        String @id @default(cuid())
+
+  sku       String @unique
+ 
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  colorId   String
+  color     Color @relation(fields: [colorId], references: [id])
+
+  sizeId    String
+  size      Size @relation(fields: [sizeId], references: [id])
+
+  price     Int?
+  salePrice Int?
+
+  stock     Int @default(0)
+  reservedStock Int @default(0)
+
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, colorId, sizeId])
+  @@index([productId])
+  @@index([colorId])
+  @@index([sizeId])
+}
+
+model Attribute {
+  id                String @id @default(cuid())
+
+  name              String @unique
+
+  values            AttributeValue[]
+  categories        CategoryAttribute[]
+  productAttributes ProductAttribute[]
+}
+
+model AttributeValue {
+  id          String @id @default(cuid())
+
+  value       String
+
+  attributeId String
+  attribute   Attribute @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+
+  products    ProductAttribute[]
+
+  @@unique([attributeId, value])
+}
+
+model CategoryAttribute {
+  id          String @id @default(cuid())
+
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  attributeId String
+  attribute   Attribute @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, attributeId])
+}
+
+model ProductAttribute {
+  id               String @id @default(cuid())
+
+  productId        String
+  product          Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  attributeId      String
+  attribute        Attribute @relation(fields: [attributeId], references: [id])
+
+  attributeValueId String
+  attributeValue   AttributeValue @relation(fields: [attributeValueId], references: [id])
+
+  @@unique([productId, attributeId])
+}
+
+model Address {
+  id           String   @id @default(cuid())
+
+  userId       String
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  label        String?
+
+  receiverName String
+
+  phone        String
+
+  province     String
+
+  city         String
+
+  details      String
+
+  postalCode   String
+
+  isDefault    Boolean @default(false)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+}
+
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+
+model Order {
+  id        String @id @default(cuid())
+
+  orderNumber String @unique @db.VarChar(20)
+
+  userId    String
+  user      User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  status    OrderStatus @default(PENDING)
+
+  subtotal     Int
+  discount     Int @default(0)
+  shippingFee  Int @default(0)
+  totalPrice   Int
+
+  shippingReceiverName String
+  shippingPhone        String
+  shippingProvince     String
+  shippingCity         String
+  shippingAddress      String
+  shippingPostalCode   String
+
+  items     OrderItem[]
+  payment   Payment?
+  shipment  Shipment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  couponId   String?
+  coupon     Coupon? @relation(fields: [couponId], references: [id], onDelete: SetNull)
+  couponCode String?
+
+  @@index([couponId])
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  orderId String
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  variantId    String
+  variant      ProductVariant @relation(fields:[variantId], references:[id], onDelete: Restrict)
+
+  sku          String
+  productTitle String
+  colorName    String
+  sizeName     String
+
+  unitPrice Int
+  salePrice Int?
+
+  quantity Int
+
+  lineTotal Int
+
+  image String
+
+  @@index([orderId])
+  @@index([variantId])
+}
+
+enum ShipmentStatus {
+  PENDING
+  PACKING
+  SHIPPED
+  DELIVERED
+  RETURNED
+}
+
+model Shipment {
+  id String @id @default(cuid())
+
+  orderId String @unique
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  carrierId   String
+  carrier     Carrier @relation(fields: [carrierId],references: [id],onDelete:Restrict)
+
+  trackingCode String?
+
+  status ShipmentStatus @default(PENDING)
+
+  shippedAt DateTime?
+
+  deliveredAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([trackingCode])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model Payment {
+  id String @id @default(cuid())
+
+  orderId String @unique
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  amount Int
+
+  gateway String
+
+  authority String?
+
+  refId String?
+
+  status PaymentStatus @default(PENDING)
+
+  paidAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+
+model Carrier {
+  id    String @id @default(cuid())
+
+  name  String
+
+  cost  Int
+
+  shipments Shipment[]
+}
+
+
+model Collection {
+
+    id String @id @default(cuid())
+
+    name String
+
+    slug String @unique
+
+    description String?
+
+    image String?
+
+    isActive Boolean @default(true)
+
+    startsAt DateTime?
+
+    endsAt DateTime?
+
+    products ProductCollection[]
+
+    createdAt DateTime @default(now())
+
+    updatedAt DateTime @updatedAt
+
+}
+
+model ProductCollection {
+
+    productId String
+
+    collectionId String
+
+    product Product @relation(fields:[productId], references:[id], onDelete: Cascade)
+
+    collection Collection @relation(fields:[collectionId], references:[id], onDelete: Cascade)
+
+    @@id([productId, collectionId])
+
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Review {
+  id String @id @default(cuid())
+
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  rating Int
+
+  title String?
+  comment String
+
+  status ReviewStatus @default(PENDING)
+
+  isVerifiedPurchase Boolean @default(false)
+
+  adminReply String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, userId])
+  @@index([productId])
+  @@index([userId])
+  @@index([status])
+}
+
+model Look {
+  id String @id @default(cuid())
+
+  title String
+
+  slug String @unique
+
+  description String?
+
+  image String
+
+  isPublished Boolean @default(false)
+
+  sortOrder Int @default(0)
+
+  startsAt DateTime?
+  endsAt DateTime?
+
+  items LookItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isPublished])
+  @@index([sortOrder])
+}
+
+model LookItem {
+
+  id String @id @default(cuid())
+
+  lookId String
+  look Look @relation(fields: [lookId], references: [id], onDelete: Cascade)
+
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  sortOrder Int @default(0)
+
+  @@unique([lookId, productId])
+  @@index([lookId])
+  @@index([productId])
+}
+
+enum CouponType {
+  PERCENTAGE
+  FIXED
+}
+
+model Coupon {
+  id             String       @id @default(cuid())
+  code           String       @unique
+  type           CouponType
+  value          Decimal      @db.Decimal(12, 2)
+  minOrderAmount Decimal?     @db.Decimal(12, 2)
+  maxDiscount    Decimal?     @db.Decimal(12, 2)
+  usageLimit     Int?
+  usedCount      Int          @default(0)
+  startsAt       DateTime?
+  expiresAt      DateTime?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  orders         Order[]
+  users          CouponUser[]
+
+  @@index([isActive])
+  @@index([expiresAt])
+}
+
+model CouponUser {
+  couponId String
+  userId   String
+  coupon   Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([couponId, userId])
+  @@index([userId])
+}
+
+enum HeroContentPosition {
+  TOP_LEFT
+  TOP_CENTER
+  TOP_RIGHT
+
+  CENTER_LEFT
+  CENTER
+  CENTER_RIGHT
+
+  BOTTOM_LEFT
+  BOTTOM_CENTER
+  BOTTOM_RIGHT
+}
+
+enum HeroCtaType {
+  PRODUCT
+  COLLECTION
+  CATEGORY
+}
+
+/// Colour of the text laid over the photo. LIGHT = white text (for dark photos),
+/// DARK = near-black text (for bright photos).
+enum HeroTextTone {
+  LIGHT
+  DARK
+}
+
+model HeroSlide {
+  id String @id @default(cuid())
+
+  // Content
+  eyebrow     String? // small line above the title, optional
+  title       String // use "\n" for line breaks, the last line is set lighter
+  description String?
+  image       String
+  mobileImage String?
+  imageAlt    String?
+
+  // Crop focus (0-100, percent) so faces stay in frame on every screen
+  focalX Int @default(50)
+  focalY Int @default(50)
+
+  // CTA
+  ctaLabel    String?
+  ctaType     HeroCtaType?
+  ctaTargetId String? // what the admin picked
+  ctaSlug     String? // resolved from ctaTargetId on save, used to build the link
+
+  // Layout
+  desktopPosition HeroContentPosition @default(CENTER_LEFT)
+  mobilePosition  HeroContentPosition @default(CENTER)
+  textTone        HeroTextTone        @default(LIGHT)
+
+  // Management
+  sortOrder Int       @default(0)
+  isActive  Boolean   @default(true)
+  startsAt  DateTime?
+  endsAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive, sortOrder])
+}
+
+
+model StorageObject {
+  id             String        @id @default(cuid())
+
+  key            String        @unique
+
+
+  referenceCount Int           @default(0)
+
+  mimeType       String?
+  size           Int?
+
+  // Set the moment referenceCount drops to 0; cleared the moment it goes
+  // back above 0. The cleanup job only touches rows older than the grace
+  // period, so a freshly-presigned-but-never-attached upload isn't deleted
+  // out from under a slow client.
+  unreferencedAt DateTime?
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([referenceCount, unreferencedAt])
+}
