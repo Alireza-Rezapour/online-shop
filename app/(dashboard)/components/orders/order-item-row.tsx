@@ -1,7 +1,13 @@
+import { Prisma } from "@/lib/generated/prisma/client";
 import { formatPrice } from "@/lib/utils";
-import { OrderItem } from "../../types";
+import { orderInclude } from "@/services/order/order.dto";
 
-export function OrderItemRow({ item }: { item: OrderItem }) {
+type OrderWithRelations = Prisma.OrderGetPayload<{
+  include: typeof orderInclude;
+}>;
+export type OrderItemDto = OrderWithRelations["items"][number];
+
+export function OrderItemRow({ item }: { item: OrderItemDto }) {
   return (
     <div className="flex items-center justify-between gap-4 py-3">
       <div className="flex items-center gap-3">
@@ -19,7 +25,7 @@ export function OrderItemRow({ item }: { item: OrderItem }) {
       </div>
       <div className="flex items-center gap-4 text-left">
         <div className="text-xs text-muted-foreground">
-          {item.quantity} × {formatPrice(item.salePrice, "تومان")}
+          {item.quantity} × {formatPrice(item.unitPrice, "تومان")}
         </div>
         <p className="text-sm font-semibold text-foreground">
           {formatPrice(item.lineTotal, "تومان")}

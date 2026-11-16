@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, use } from "react";
+import { ReactElement, ReactNode, use } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -19,9 +19,6 @@ import { OrderItem } from "../../types";
 import { PriceSummary } from "../../components/orders/price-summary";
 import { formatPrice } from "@/lib/utils";
 
-// TODO: point this at your real RTK Query slice/hook
-// import { useGetOrderByIdQuery } from "@/store/services/order-api";
-
 export default function OrderDetailPage({
   params,
 }: {
@@ -38,30 +35,25 @@ export default function OrderDetailPage({
         <p className="text-sm text-muted-foreground">
           سفارش مورد نظر یافت نشد.
         </p>
-        <Link href="/orders">
-          <Button variant="outline" className="mt-4">
-            بازگشت به سفارش‌ها
-          </Button>
-        </Link>
+        <Button asChild variant="outline" className="mt-4">
+          <Link href="/orders">بازگشت به سفارش‌ها</Link>
+        </Button>
       </div>
     );
   }
 
-  const quantity = order.items.reduce(
-    (acc: number, item: OrderItem) => acc + item.quantity,
-    0,
-  );
+  const quantity = order.items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Link href="/orders">
-            <Button variant="ghost" size="icon">
+          <Button asChild variant="ghost" size="icon">
+            <Link href="/orders">
               <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
           <div>
             <p className="text-sm font-semibold text-foreground">
               سفارش {order.id}
@@ -80,7 +72,7 @@ export default function OrderDetailPage({
           محصولات ({quantity})
         </h2>
         <div className="divide-y divide-border_soft">
-          {order.items.map((item: OrderItem) => (
+          {order.items.map((item) => (
             <OrderItemRow key={item.id} item={item} />
           ))}
         </div>
@@ -112,7 +104,10 @@ export default function OrderDetailPage({
           {order.payment ? (
             <div className="space-y-2 text-sm text-muted-foreground">
               <InfoRow label="درگاه" value={order.payment.gateway} />
-              <InfoRow label="مبلغ" value={order.payment.amount} />
+              <InfoRow
+                label="مبلغ"
+                value={formatPrice(Number(order.payment.amount))}
+              />
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
@@ -155,11 +150,11 @@ export default function OrderDetailPage({
 
       {/* Actions */}
       <div className="flex flex-wrap gap-2">
-        <Link href={`/orders/${order.id}/bills`}>
-          <Button variant="outline" size="sm">
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/orders/${order.id}/bills`}>
             <FileText className="h-3.5 w-3.5" /> مشاهده صورت‌حساب
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         {order.shipment && (
           <Button variant="outline" size="sm">
             <Truck className="h-3.5 w-3.5" /> رهگیری مرسوله
@@ -176,13 +171,13 @@ function InfoRow({
   full,
 }: {
   label: string;
-  value: ReactElement;
+  value: ReactNode;
   full?: boolean;
 }) {
   return (
     <div className={full ? "sm:col-span-2" : undefined}>
       <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="font-medium text-foreground">{value}</p>
+      <p className="font-medium text-foreground">{value ?? "—"}</p>
     </div>
   );
 }

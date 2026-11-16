@@ -1,8 +1,5 @@
-import type {
-  HeroContentPosition,
-  HeroCtaType,
-  HeroSlide,
-} from "@/components/hero/hero-types";
+import { HeroSlide } from "@/lib/generated/prisma/client";
+import { HeroContentPosition, HeroCtaType } from "@/lib/generated/prisma/enums";
 
 export const HERO_CTA_TYPE_LABELS: Record<HeroCtaType, string> = {
   PRODUCT: "محصول",

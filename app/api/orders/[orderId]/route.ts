@@ -54,7 +54,7 @@ export async function PUT(req: NextRequest, { params }: Ctx) {
     }
     if (!["PENDING", "PAID", "PROCESSING"].includes(order.status)) {
       return NextResponse.json(
-        { error: "The delivery details can no longer be changed." },
+        { message: "The delivery details can no longer be changed." },
         { status: 400 },
       );
     }

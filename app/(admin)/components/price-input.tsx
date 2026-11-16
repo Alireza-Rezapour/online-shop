@@ -1,6 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { toEnglishDigits } from "../lib/product/product-utils";
 
 type Props = {
   value: number | null | undefined;
