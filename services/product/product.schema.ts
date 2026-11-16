@@ -112,6 +112,7 @@ export const productListQuerySchema = z.object({
   sort: z
     .enum(["newest", "oldest", "price-asc", "price-desc", "title", "relevance"])
     .default("newest"),
+  collection: z.string().optional(),
 });
 
 export const storeProductListQuerySchema = z.object({
@@ -176,6 +177,7 @@ export type StoreProductListParams = {
   sizes?: string[];
   sort?: "newest" | "price-asc" | "price-desc" | "title" | "relevance";
   favorites?: boolean;
+  collection?: string;
 };
 
 export type ProductListQuery = z.output<typeof productListQuerySchema>;

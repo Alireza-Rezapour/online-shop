@@ -36,6 +36,6 @@ export interface HeroSlide {
   textTone: HeroTextTone;
   sortOrder: number;
   isActive: boolean;
-  startsAt: string | null;
-  endsAt: string | null;
+  startsAt: Date | null;
+  endsAt: Date | null;
 }

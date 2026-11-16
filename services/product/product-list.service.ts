@@ -33,6 +33,7 @@ const orderByMap: Record<
   "price-asc": { basePrice: "asc" },
   "price-desc": { basePrice: "desc" },
   title: { title: "asc" },
+  relevance: { title: "desc" },
 };
 
 export async function getCategoryAndDescendantIds(

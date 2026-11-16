@@ -27,6 +27,7 @@ export const baseApi = createApi({
     "AdminReview",
     "ReviewEligibility",
     "Coupon",
+    "LOOK",
   ],
   endpoints: () => ({}),
 });
