@@ -1,22 +1,31 @@
 import prisma from "@/lib/prisma";
 import { resolveVariantPrices } from "../helpers/calculatePricing";
-// import {
-//   CouponError,
-//   evaluateCoupon,
-//   type CouponErrorCode,
-// } from "../orders/applyCoupon";
 import type { CartValidationRequest } from "./cartValidation.schema";
-import {
-  CouponError,
-  CouponErrorCode,
-  evaluateCoupon,
-} from "../order/applyCoupon";
+import { evaluateCoupon } from "../coupon/coupon.service";
+
+export type CouponErrorCode =
+  | "NOT_FOUND"
+  | "INACTIVE"
+  | "NOT_STARTED"
+  | "EXPIRED"
+  | "USAGE_LIMIT_REACHED"
+  | "USER_LIMIT_REACHED"
+  | "MIN_ORDER_NOT_MET";
+
+export class CouponError extends Error {
+  constructor(
+    public code: CouponErrorCode,
+    message: string,
+    public minOrderAmount?: number,
+  ) {
+    super(message);
+    this.name = "CouponError";
+  }
+}
 
 export type CartValidationItemDto = {
   variantId: string;
-  // false when the variant no longer exists or its product is unpublished
   purchasable: boolean;
-  // Current regular and sale price of one unit (salePrice is null without a sale)
   price: number;
   salePrice: number | null;
   availableStock: number;

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "images:list": "tsx scripts/upload-images.ts --list",
     "images:upload": "tsx scripts/upload-images.ts",
     "start": "next start"
