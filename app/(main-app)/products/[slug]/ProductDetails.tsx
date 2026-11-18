@@ -55,7 +55,7 @@ function pickSize(
 
 /* ------------------------------ states ------------------------------ */
 
-function ProductDetailsSkeleton() {
+export function ProductDetailsSkeleton() {
   return (
     <div className="min-h-screen bg-white text-[#1c1a1f]">
       <div className="mx-auto max-w-6xl animate-pulse px-5 py-10 sm:px-8 lg:px-10">

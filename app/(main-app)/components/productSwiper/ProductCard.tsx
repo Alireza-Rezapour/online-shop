@@ -18,7 +18,6 @@ export interface ProductCardProps {
   product: StoreProductCardDto;
   /** 1-based position in a best-selling list; only the top three get a badge */
   rank?: number;
-  isNew?: boolean;
   priority?: boolean;
   className?: string;
 }
@@ -32,7 +31,6 @@ const formatPrice = (value: number) => faNum(value) + " تومان";
 export function ProductCard({
   product,
   rank,
-  isNew = false,
   priority = false,
   className,
 }: ProductCardProps) {
@@ -173,12 +171,6 @@ export function ProductCard({
             <span className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2 py-0.5 text-[11px] font-medium text-primary-foreground sm:text-xs">
               <Flame className="size-3 text-amber-500" aria-hidden />
               رتبه {faNum(rank)}
-            </span>
-          ) : null}
-          {isNew && isAvailable ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[11px] font-medium text-white sm:text-xs">
-              <Sparkles className="size-3" aria-hidden />
-              جدید
             </span>
           ) : null}
         </div>

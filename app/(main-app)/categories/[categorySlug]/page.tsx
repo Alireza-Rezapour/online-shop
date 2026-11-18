@@ -1,5 +1,5 @@
 import ProductsByCategory from "./ProductsByCategory";
-import { cache } from "react";
+import { cache, Suspense } from "react";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
@@ -34,8 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function CategoryPage() {
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="container mx-auto px-4 py-8">در حال بارگذاری...</div>
+      }
+    >
       <ProductsByCategory />
-    </>
+    </Suspense>
   );
 }

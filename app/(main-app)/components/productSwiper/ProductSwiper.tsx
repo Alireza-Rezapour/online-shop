@@ -43,7 +43,6 @@ export function ProductsSwiper({
   const [locked, setLocked] = useState(false);
   const [inView, setInView] = useState(false);
   const [seen, setSeen] = useState(false);
-  const [now] = useState(() => Date.now());
   const barRef = useRef<HTMLDivElement>(null);
 
   // One reveal when the section first scrolls into view; also drives autoplay
@@ -182,10 +181,6 @@ export function ProductsSwiper({
                   <ProductCard
                     product={product}
                     rank={variant === "bestSelling" ? i + 1 : undefined}
-                    isNew={
-                      variant === "newest" &&
-                      now - Date.parse(product.createdAt) < NEW_WINDOW_MS
-                    }
                   />
                 </div>
               </SwiperSlide>

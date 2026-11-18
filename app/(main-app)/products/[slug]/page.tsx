@@ -1,5 +1,5 @@
-import ProductDetails from "./ProductDetails";
-import { cache } from "react";
+import ProductDetails, { ProductDetailsSkeleton } from "./ProductDetails";
+import { cache, Suspense } from "react";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 import { getPublicUrl } from "@/services/storage/storage.public-url";
@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ProductDetailsPage() {
   return (
-    <>
+    <Suspense fallback={<ProductDetailsSkeleton />}>
       <ProductDetails />
-    </>
+    </Suspense>
   );
 }

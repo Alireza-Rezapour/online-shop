@@ -4,7 +4,6 @@ import { use } from "react";
 import { ArrowRight, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGetOrderQuery } from "@/redux/services/orderApi";
-import { OrderItem } from "@/app/(dashboard)/types";
 import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
 import { formatDate } from "@/app/(dashboard)/data/utils";

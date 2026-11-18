@@ -10,13 +10,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Suspense } from "react";
 
 interface PaymentSuccessPageProps {
   params: Promise<{ orderId: string }>;
   searchParams: Promise<{ amount?: string }>;
 }
 
-export default async function PaymentSuccessPage({
+async function PaymentSuccessContent({
   params,
   searchParams,
 }: PaymentSuccessPageProps) {
@@ -66,5 +67,16 @@ export default async function PaymentSuccessPage({
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function PaymentSuccessPage(props: PaymentSuccessPageProps) {
+  return (
+    <Suspense fallback={<div className="min-h-[70vh]" />}>
+      <PaymentSuccessContent
+        params={props.params}
+        searchParams={props.searchParams}
+      />
+    </Suspense>
   );
 }

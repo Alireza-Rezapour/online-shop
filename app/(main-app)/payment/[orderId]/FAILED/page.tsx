@@ -9,14 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
 
 interface PaymentFailedPageProps {
   params: Promise<{ orderId: string }>;
 }
 
-export default async function PaymentFailedPage({
-  params,
-}: PaymentFailedPageProps) {
+async function PaymentFailedContent({ params }: PaymentFailedPageProps) {
   const { orderId } = await params;
 
   return (
@@ -51,5 +50,13 @@ export default async function PaymentFailedPage({
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function PaymentFailedPage({ params }: PaymentFailedPageProps) {
+  return (
+    <Suspense fallback={<div className="min-h-[70vh]" />}>
+      <PaymentFailedContent params={params} />
+    </Suspense>
   );
 }

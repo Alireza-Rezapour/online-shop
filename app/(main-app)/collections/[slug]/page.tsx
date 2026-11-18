@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getSession } from "@/lib/session";
 import { getCollectionBySlug } from "@/services/collection/collection.service";
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function CollectionPage({ params }: Props) {
+async function CollectionContent({ params }: Props) {
   const collection = await loadCollection((await params).slug);
   const session = await getSession();
 
@@ -48,5 +49,17 @@ export default async function CollectionPage({ params }: Props) {
         title={collection.name}
       />
     </>
+  );
+}
+
+export default function CollectionPage({ params }: Props) {
+  return (
+    <Suspense
+      fallback={
+        <div className="container mx-auto px-4 py-8">در حال بارگذاری...</div>
+      }
+    >
+      <CollectionContent params={params} />
+    </Suspense>
   );
 }
